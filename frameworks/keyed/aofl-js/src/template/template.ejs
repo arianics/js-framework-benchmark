@@ -7,12 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <template>aoflTemplate:metaTags</template>
     <title>aoflTemplate:title</title>
-    <style>${require("./css/index.css")}</style>
+    <style>${require("./main/css/index.css")}</style>
   </head>
   <body>
-    <route-view></route-view>
+    <benchmark-element></benchmark-element>
 
-    <script><%= assetsMap['runtime'].source %></script>
+    <%if (assetsMap['runtime']) { %>
+      <script><%= assetsMap['runtime'].source %></script>
+    <% } %>
+
     <script>
       (function() {
         if (window.customElements) {
@@ -20,7 +23,9 @@
         }
       }());
     </script>
-    <script><%= assetsMap['common'] && assetsMap['common'].source %></script>
-    <script><%= assetsMap['main'].source %></script>
+    <%if (assetsMap['runtime']) { %>
+      <script src="<%= assetsMap['common'].url %>"></script>
+    <% } %>
+    <script src="<%= assetsMap['main'].url %>"></script>
   </body>
 </html>
