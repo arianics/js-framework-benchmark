@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  name: 'Aofl 3.x Benchmark (keyed)',
+  name: 'Aofl 3.x Benchmark (non-keyed)',
   build: {
-    publicPath: '/frameworks/keyed/aofl-js/__build/',
+    publicPath: '/frameworks/non-keyed/aofl-js/__build/',
     css: {
       include: [path.join(__dirname, '..', '..', '..', 'css')]
     },
