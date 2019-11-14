@@ -86,10 +86,8 @@ class MainElement extends AoflElement {
     if (index === this.selected) {
       this.selected = -1;
     }
-    this.data = [
-      ...this.data.slice(0, index),
-      ...this.data.slice(index + 1)
-    ];
+    this.data.splice(index, 1);
+    this.requestUpdate();
   }
 
   select(e) {
@@ -97,32 +95,20 @@ class MainElement extends AoflElement {
     const index = parseInt(e.currentTarget.dataset.index, 10);
 
     if (this.selected > -1) {
-      this.data[this.selected] = {
-        ...this.data[this.selected],
-        selected: false
-      };
+      this.data[this.selected].selected = false;
     }
     this.selected = index;
-    this.data = [
-      ...this.data.slice(0, index),
-      {
-        ...this.data[index],
-        selected: true
-      },
-      ...this.data.slice(index + 1)
-    ];
+    this.data[index].selected = true;
+    this.requestUpdate();
   }
 
   swapRows() {
     if (this.data.length > 998) {
-      this.data = [
-        ...this.data.slice(0, 1),
-        this.data[998],
-        ...this.data.slice(2, 998),
-        this.data[1],
-        ...this.data.slice(999)
-      ];
+      const tmp = this.data[1];
+      this.data[1] = this.data[998];
+      this.data[998] = tmp;
     }
+    this.requestUpdate();
   }
   /**
    *
